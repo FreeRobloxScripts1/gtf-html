@@ -92,28 +92,33 @@
             background-color: #004494;
             box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
         }
-        .mode-selector {
-            position: absolute;
+        /* Mode button styles */
+        .mode-button {
+            position: fixed;
             bottom: 20px;
             left: 20px;
-            display: flex;
-            gap: 10px;
-        }
-        .mode-selector button {
-            background-color: #6c757d;
-            border: none;
-            border-radius: 5px;
+            background-color: #28a745;
             color: #fff;
-            padding: 5px 10px;
-            font-size: 14px;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
             cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 123, 255, 0.1);
             transition: background-color 0.3s ease;
         }
-        .mode-selector button:hover {
-            background-color: #5a6268;
+        .mode-button:hover {
+            background-color: #218838;
         }
-        .mode-selector button:active {
-            background-color: #4e555b;
+        .mode-button:active {
+            background-color: #1e7e34;
+            box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
+        }
+        @media (max-width: 600px) {
+            .mode-button {
+                bottom: 10px;
+                left: 10px;
+            }
         }
     </style>
 </head>
@@ -130,17 +135,11 @@
         <button id="option3"></button>
         <button id="option4"></button>
     </div>
-    <div class="mode-selector">
-        <button onclick="setMode('asia')">Asia</button>
-        <button onclick="setMode('africa')">Africa</button>
-        <button onclick="setMode('north-america')">North America</button>
-        <button onclick="setMode('south-america')">South America</button>
-        <button onclick="setMode('europe')">Europe</button>
-    </div>
+    <button class="mode-button" id="modeButton">Asia</button>
     <script>
         const countries = {
             asia: [
-                {name: "Afghanistan", code: "af"}, {name: "Armenia", code: "am"}, 
+                {name: "Afghanistan", code: "af"}, {name: "Armenia", code: "am"},
                 {name: "Azerbaijan", code: "az"}, {name: "Bahrain", code: "bh"},
                 {name: "Bangladesh", code: "bd"}, {name: "Brunei", code: "bn"},
                 {name: "Cambodia", code: "kh"}, {name: "China", code: "cn"},
@@ -189,11 +188,12 @@
                 {name: "Senegal", code: "sn"}, {name: "Seychelles", code: "sc"},
                 {name: "Sierra Leone", code: "sl"}, {name: "Somalia", code: "so"},
                 {name: "South Africa", code: "za"}, {name: "South Sudan", code: "ss"},
-                {name: "Sudan", code: "sd"}, {name: "Togo", code: "tg"},
-                {name: "Tunisia", code: "tn"}, {name: "Uganda", code: "ug"},
-                {name: "Zambia", code: "zm"}, {name: "Zimbabwe", code: "zw"}
+                {name: "Sudan", code: "sd"}, {name: "Tanzania", code: "tz"},
+                {name: "Togo", code: "tg"}, {name: "Tunisia", code: "tn"},
+                {name: "Uganda", code: "ug"}, {name: "Zambia", code: "zm"},
+                {name: "Zimbabwe", code: "zw"}
             ],
-            "north-america": [
+            northAmerica: [
                 {name: "Antigua and Barbuda", code: "ag"}, {name: "Bahamas", code: "bs"},
                 {name: "Barbados", code: "bb"}, {name: "Belize", code: "bz"},
                 {name: "Canada", code: "ca"}, {name: "Costa Rica", code: "cr"},
@@ -207,7 +207,7 @@
                 {name: "Saint Vincent and the Grenadines", code: "vc"}, {name: "Trinidad and Tobago", code: "tt"},
                 {name: "United States", code: "us"}
             ],
-            "south-america": [
+            southAmerica: [
                 {name: "Argentina", code: "ar"}, {name: "Bolivia", code: "bo"},
                 {name: "Brazil", code: "br"}, {name: "Chile", code: "cl"},
                 {name: "Colombia", code: "co"}, {name: "Ecuador", code: "ec"},
@@ -216,55 +216,46 @@
                 {name: "Uruguay", code: "uy"}, {name: "Venezuela", code: "ve"}
             ],
             europe: [
-    {name: "Albania", code: "al"}, {name: "Andorra", code: "ad"},
-    {name: "Armenia", code: "am"}, {name: "Austria", code: "at"},
-    {name: "Azerbaijan", code: "az"}, {name: "Belarus", code: "by"},
-    {name: "Belgium", code: "be"}, {name: "Bosnia and Herzegovina", code: "ba"},
-    {name: "Bulgaria", code: "bg"}, {name: "Croatia", code: "hr"},
-    {name: "Cyprus", code: "cy"}, {name: "Czech Republic", code: "cz"},
-    {name: "Denmark", code: "dk"}, {name: "Estonia", code: "ee"},
-    {name: "Finland", code: "fi"}, {name: "France", code: "fr"},
-    {name: "Germany", code: "de"}, {name: "Greece", code: "gr"},
-    {name: "Hungary", code: "hu"}, {name: "Iceland", code: "is"},
-    {name: "Ireland", code: "ie"}, {name: "Italy", code: "it"},
-    {name: "Kosovo", code: "xk"}, {name: "Latvia", code: "lv"},
-    {name: "Liechtenstein", code: "li"}, {name: "Lithuania", code: "lt"},
-    {name: "Luxembourg", code: "lu"}, {name: "Malta", code: "mt"},
-    {name: "Moldova", code: "md"}, {name: "Monaco", code: "mc"},
-    {name: "Montenegro", code: "me"}, {name: "Netherlands", code: "nl"},
-    {name: "North Macedonia", code: "mk"}, {name: "Norway", code: "no"},
-    {name: "Poland", code: "pl"}, {name: "Portugal", code: "pt"},
-    {name: "Romania", code: "ro"}, {name: "San Marino", code: "sm"},
-    {name: "Serbia", code: "rs"}, {name: "Slovakia", code: "sk"},
-    {name: "Slovenia", code: "si"}, {name: "Spain", code: "es"},
-    {name: "Sweden", code: "se"}, {name: "Switzerland", code: "ch"},
-    {name: "Turkey", code: "tr"}, {name: "Ukraine", code: "ua"},
-    {name: "United Kingdom", code: "gb"}, {name: "Vatican City", code: "va"}
-]
+                {name: "Albania", code: "al"}, {name: "Andorra", code: "ad"},
+                {name: "Austria", code: "at"}, {name: "Belarus", code: "by"},
+                {name: "Belgium", code: "be"}, {name: "Bosnia and Herzegovina", code: "ba"},
+                {name: "Bulgaria", code: "bg"}, {name: "Croatia", code: "hr"},
+                {name: "Cyprus", code: "cy"}, {name: "Czech Republic", code: "cz"},
+                {name: "Denmark", code: "dk"}, {name: "Estonia", code: "ee"},
+                {name: "Finland", code: "fi"}, {name: "France", code: "fr"},
+                {name: "Germany", code: "de"}, {name: "Greece", code: "gr"},
+                {name: "Hungary", code: "hu"}, {name: "Iceland", code: "is"},
+                {name: "Ireland", code: "ie"}, {name: "Italy", code: "it"},
+                {name: "Kosovo", code: "xk"}, {name: "Latvia", code: "lv"},
+                {name: "Liechtenstein", code: "li"}, {name: "Lithuania", code: "lt"},
+                {name: "Luxembourg", code: "lu"}, {name: "Malta", code: "mt"},
+                {name: "Moldova", code: "md"}, {name: "Monaco", code: "mc"},
+                {name: "Montenegro", code: "me"}, {name: "Netherlands", code: "nl"},
+                {name: "North Macedonia", code: "mk"}, {name: "Norway", code: "no"},
+                {name: "Poland", code: "pl"}, {name: "Portugal", code: "pt"},
+                {name: "Romania", code: "ro"}, {name: "San Marino", code: "sm"},
+                {name: "Serbia", code: "rs"}, {name: "Slovakia", code: "sk"},
+                {name: "Slovenia", code: "si"}, {name: "Spain", code: "es"},
+                {name: "Sweden", code: "se"}, {name: "Switzerland", code: "ch"},
+                {name: "Ukraine", code: "ua"}, {name: "Vatican City", code: "va"}
+            ]
         };
 
+        let currentContinent = "asia";
         let answeredFlags = new Set();
         let currentLevel = 1;
-        let currentMode = 'asia'; // Default mode
-
-        function setMode(mode) {
-            currentMode = mode;
-            answeredFlags.clear();
-            currentLevel = 1;
-            document.getElementById("level").textContent = currentLevel;
-            loadFlag();
-        }
+        let maxLevel = countries[currentContinent].length;
 
         function loadFlag() {
-            if (currentLevel > 195) {
-                alert("You Answered All Flags! Your Are Now A Flag Master");
+            if (currentLevel > maxLevel) {
+                alert(`You've Completed All Flags For ${currentContinent}!`);
                 currentLevel = 1;
                 answeredFlags.clear();
+                maxLevel = countries[currentContinent].length;
             }
 
-            const availableCountries = countries[currentMode].filter(country => !answeredFlags.has(country.code));
+            const availableCountries = countries[currentContinent].filter(country => !answeredFlags.has(country.code));
             if (availableCountries.length === 0) {
-                alert("No more new flags to show! Restarting...");
                 answeredFlags.clear();
                 return loadFlag();
             }
@@ -277,10 +268,12 @@
             flagImg.src = `https://flagcdn.com/${correctCountry.code}.svg`;
 
             const options = Array.from(document.querySelectorAll(".options button"));
-
             const correctButtonIndex = Math.floor(Math.random() * options.length);
 
-            const shuffledCountries = [...countries[currentMode]].filter(country => country.code !== correctCountry.code).sort(() => 0.5 - Math.random()).slice(0, 3);
+            const shuffledCountries = [...countries[currentContinent]]
+                .filter(country => country.code !== correctCountry.code)
+                .sort(() => 0.5 - Math.random())
+                .slice(0, 3);
             shuffledCountries.splice(correctButtonIndex, 0, correctCountry);
 
             options.forEach((button, index) => {
@@ -291,14 +284,23 @@
                         document.getElementById("level").textContent = currentLevel;
                         loadFlag();
                     } else {
-                        alert(`Wrong Answer, The Correct Was ${correctCountry.name}`);
+                        alert(`Wrong Answer, The Correct Was ${correctCountry.name}!`);
                         loadFlag();
                     }
                 };
             });
         }
 
-        window.onload = loadFlag;
+        document.getElementById("modeButton").addEventListener("click", () => {
+            const continents = ["asia", "africa", "northAmerica", "southAmerica", "europe"];
+            currentContinent = continents[(continents.indexOf(currentContinent) + 1) % continents.length];
+            maxLevel = countries[currentContinent].length;
+            currentLevel = 1;
+            answeredFlags.clear();
+            loadFlag();
+        });
+
+        loadFlag();
     </script>
 </body>
 </html>
