@@ -68,7 +68,7 @@ h1 {
 img {
     max-width: 100%;
     height: auto;
-    border-radius: 15px; /* Rounded corners */
+    border-radius: 15px;
 }
 
 .options {
@@ -253,7 +253,8 @@ img {
                         document.getElementById("level").textContent = currentLevel;
                         loadFlag();
                     } else {
-                        alert("Wrong Answer, The Correct Was");
+                        alert("Wrong Answer, The Correct Was ${correctCountry.name}");
+                        loadFlag();
                     }
                 };
             });
