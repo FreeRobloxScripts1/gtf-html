@@ -156,12 +156,11 @@
 
         function loadFlag() {
             if (currentLevel > 195) {
-                alert("You've answered all flags! Restarting the game...");
+                alert("You Answered All Flags! Your Are Now A Flag Master");
                 currentLevel = 1;
                 answeredFlags.clear();
             }
 
-            // Filter out already answered flags
             const availableCountries = countries.filter(country => !answeredFlags.has(country.code));
             if (availableCountries.length === 0) {
                 alert("No more new flags to show! Restarting...");
@@ -169,27 +168,18 @@
                 return loadFlag();
             }
 
-            // Select a random correct country
             const correctIndex = Math.floor(Math.random() * availableCountries.length);
             const correctCountry = availableCountries[correctIndex];
-
-            // Add to answered set
             answeredFlags.add(correctCountry.code);
 
-            // Set the flag image
             const flagImg = document.getElementById("flag");
-            flagImg.src = `https://flagpedia.net/data/flags/w702/${correctCountry.code}.webp`;
+            flagImg.src = `https://flagcdn.com/${correctCountry.code}.svg`;
 
-            // Generate options
             const options = Array.from(document.querySelectorAll(".options button"));
 
-            // Randomize the index for the correct answer
             const correctButtonIndex = Math.floor(Math.random() * options.length);
 
-            // Shuffle countries for options
             const shuffledCountries = [...countries].filter(country => country.code !== correctCountry.code).sort(() => 0.5 - Math.random()).slice(0, 3);
-
-            // Insert the correct answer into the options array
             shuffledCountries.splice(correctButtonIndex, 0, correctCountry);
 
             options.forEach((button, index) => {
@@ -200,7 +190,7 @@
                         document.getElementById("level").textContent = currentLevel;
                         loadFlag();
                     } else {
-                        alert("Wrong! Try again.");
+                        alert("Wrong Answer, The Correct Was");
                     }
                 };
             });
