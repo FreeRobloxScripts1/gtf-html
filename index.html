@@ -3,18 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg">
-    <meta name="msapplication-TileColor" content="#ffffff">
+    <link rel="apple-touch-icon" sizes="180x180" href="/ wwwaw di apple-touch-icon.png">
+    <link rel="icon" type="image/png" o name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
     <title>Guess The Flag</title>
     <style>
         body {
             text-align: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneqqva, Verdana, sans-serif;
             background-color: #f4f4f9;
             color: #333;
             margin: 0;
@@ -25,7 +21,36 @@
             justify-content: center;
             min-height: 100vh;
         }
-
+        .flag-container {
+            margin-top: 20px;
+        }
+        img {
+            max-width: 300px;
+            height: auto;
+        }
+        .options {
+            margin-top: 20px;
+        }
+        .options button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .level {
+            margin: 20px;
+            font-size: 18px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .level {
+            margin: 20px;
+            font-size: 1.2em;
+            color: #555;
+        }
         .flag-container {
             margin-top: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -33,13 +58,11 @@
             overflow: hidden;
             background-color: #fff;
         }
-
         img {
             max-width: 100%;
             height: auto;
             border-radius: 15px;
         }
-
         .options {
             margin-top: 20px;
             display: flex;
@@ -47,7 +70,6 @@
             gap: 10px;
             flex-wrap: wrap;
         }
-
         .options button {
             background-color: #007bff;
             border: none;
@@ -59,37 +81,40 @@
             transition: background-color 0.3s ease;
             box-shadow: 0 4px 6px rgba(0, 123, 255, 0.1);
         }
-
         .options button:hover {
             background-color: #0056b3;
         }
-
         .options button:active {
             background-color: #004494;
             box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
         }
-
-        .mode {
+        /* Mode button styles */
+        .mode-button {
             position: fixed;
             bottom: 20px;
             left: 20px;
             background-color: #28a745;
+            color: #fff;
             border: none;
             border-radius: 10px;
-            color: #fff;
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 123, 255, 0.1);
             transition: background-color 0.3s ease;
-            z-index: 1000;
         }
-
-        .mode:hover {
+        .mode-button:hover {
             background-color: #218838;
         }
-
-        .mode:active {
+        .mode-button:active {
             background-color: #1e7e34;
+            box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
+        }
+        @media (max-width: 600px) {
+            .mode-button {
+                bottom: 10px;
+                left: 10px;
+            }
         }
     </style>
 </head>
@@ -106,37 +131,36 @@
         <button id="option3"></button>
         <button id="option4"></button>
     </div>
-    <button class="mode" id="mode">Asia</button>
-
+    <button class="mode-button" id="modeButton">Asia</button>
     <script>
-        const continents = {
-            "Asia": [
+        const countries = {
+            asia: [
                 {name: "Afghanistan", code: "af"}, {name: "Armenia", code: "am"},
                 {name: "Azerbaijan", code: "az"}, {name: "Bahrain", code: "bh"},
-                {name: "Bangladesh", code: "bd"}, {name: "Bhutan", code: "bt"},
-                {name: "Brunei", code: "bn"}, {name: "Cambodia", code: "kh"},
-                {name: "China", code: "cn"}, {name: "Cyprus", code: "cy"},
-                {name: "Georgia", code: "ge"}, {name: "India", code: "in"},
-                {name: "Indonesia", code: "id"}, {name: "Iran", code: "ir"},
-                {name: "Iraq", code: "iq"}, {name: "Israel", code: "il"},
-                {name: "Japan", code: "jp"}, {name: "Jordan", code: "jo"},
-                {name: "Kazakhstan", code: "kz"}, {name: "Kuwait", code: "kw"},
-                {name: "Kyrgyzstan", code: "kg"}, {name: "Laos", code: "la"},
-                {name: "Lebanon", code: "lb"}, {name: "Malaysia", code: "my"},
-                {name: "Maldives", code: "mv"}, {name: "Mongolia", code: "mn"},
-                {name: "Myanmar", code: "mm"}, {name: "Nepal", code: "np"},
-                {name: "North Korea", code: "kp"}, {name: "Oman", code: "om"},
-                {name: "Pakistan", code: "pk"}, {name: "Palestine", code: "ps"},
-                {name: "Philippines", code: "ph"}, {name: "Qatar", code: "qa"},
-                {name: "Saudi Arabia", code: "sa"}, {name: "Singapore", code: "sg"},
-                {name: "South Korea", code: "kr"}, {name: "Sri Lanka", code: "lk"},
-                {name: "Syria", code: "sy"}, {name: "Tajikistan", code: "tj"},
+                {name: "Bangladesh", code: "bd"}, {name: "Brunei", code: "bn"},
+                {name: "Cambodia", code: "kh"}, {name: "China", code: "cn"},
+                {name: "Cyprus", code: "cy"}, {name: "Georgia", code: "ge"},
+                {name: "India", code: "in"}, {name: "Indonesia", code: "id"},
+                {name: "Iran", code: "ir"}, {name: "Iraq", code: "iq"},
+                {name: "Israel", code: "il"}, {name: "Japan", code: "jp"},
+                {name: "Jordan", code: "jo"}, {name: "Kazakhstan", code: "kz"},
+                {name: "Kuwait", code: "kw"}, {name: "Kyrgyzstan", code: "kg"},
+                {name: "Laos", code: "la"}, {name: "Lebanon", code: "lb"},
+                {name: "Malaysia", code: "my"}, {name: "Maldives", code: "mv"},
+                {name: "Mongolia", code: "mn"}, {name: "Myanmar", code: "mm"},
+                {name: "Nepal", code: "np"}, {name: "North Korea", code: "kp"},
+                {name: "Oman", code: "om"}, {name: "Pakistan", code: "pk"},
+                {name: "Palestine", code: "ps"}, {name: "Philippines", code: "ph"},
+                {name: "Qatar", code: "qa"}, {name: "Saudi Arabia", code: "sa"},
+                {name: "Singapore", code: "sg"}, {name: "South Korea", code: "kr"},
+                {name: "Sri Lanka", code: "lk"}, {name: "Syria", code: "sy"},
+                {name: "Taiwan", code: "tw"}, {name: "Tajikistan", code: "tj"},
                 {name: "Thailand", code: "th"}, {name: "Timor-Leste", code: "tl"},
                 {name: "Turkey", code: "tr"}, {name: "Turkmenistan", code: "tm"},
                 {name: "United Arab Emirates", code: "ae"}, {name: "Uzbekistan", code: "uz"},
-                {name: "Vietnam", code: "vn"}, {name: "Yemen", code: "ye"}
+                {name: "Vietnam", code: "vn"}
             ],
-            "Africa": [
+            africa: [
                 {name: "Algeria", code: "dz"}, {name: "Angola", code: "ao"},
                 {name: "Benin", code: "bj"}, {name: "Botswana", code: "bw"},
                 {name: "Burkina Faso", code: "bf"}, {name: "Burundi", code: "bi"},
@@ -165,35 +189,7 @@
                 {name: "Uganda", code: "ug"}, {name: "Zambia", code: "zm"},
                 {name: "Zimbabwe", code: "zw"}
             ],
-            "Europe": [
-                {name: "Albania", code: "al"}, {name: "Andorra", code: "ad"},
-                {name: "Armenia", code: "am"}, {name: "Austria", code: "at"},
-                {name: "Azerbaijan", code: "az"}, {name: "Belarus", code: "by"},
-                {name: "Belgium", code: "be"}, {name: "Bosnia and Herzegovina", code: "ba"},
-                {name: "Bulgaria", code: "bg"}, {name: "Croatia", code: "hr"},
-                {name: "Cyprus", code: "cy"}, {name: "Czech Republic", code: "cz"},
-                {name: "Denmark", code: "dk"}, {name: "Estonia", code: "ee"},
-                {name: "Finland", code: "fi"}, {name: "France", code: "fr"},
-                {name: "Georgia", code: "ge"}, {name: "Germany", code: "de"},
-                {name: "Greece", code: "gr"}, {name: "Hungary", code: "hu"},
-                {name: "Iceland", code: "is"}, {name: "Ireland", code: "ie"},
-                {name: "Italy", code: "it"}, {name: "Kazakhstan", code: "kz"},
-                {name: "Kosovo", code: "xk"}, {name: "Latvia", code: "lv"},
-                {name: "Liechtenstein", code: "li"}, {name: "Lithuania", code: "lt"},
-                {name: "Luxembourg", code: "lu"}, {name: "Malta", code: "mt"},
-                {name: "Moldova", code: "md"}, {name: "Monaco", code: "mc"},
-                {name: "Montenegro", code: "me"}, {name: "Netherlands", code: "nl"},
-                {name: "North Macedonia", code: "mk"}, {name: "Norway", code: "no"},
-                {name: "Poland", code: "pl"}, {name: "Portugal", code: "pt"},
-                {name: "Romania", code: "ro"}, {name: "Russia", code: "ru"},
-                {name: "San Marino", code: "sm"}, {name: "Serbia", code: "rs"},
-                {name: "Slovakia", code: "sk"}, {name: "Slovenia", code: "si"},
-                {name: "Spain", code: "es"}, {name: "Sweden", code: "se"},
-                {name: "Switzerland", code: "ch"}, {name: "Turkey", code: "tr"},
-                {name: "Ukraine", code: "ua"}, {name: "United Kingdom", code: "gb"},
-                {name: "Vatican City", code: "va"}
-            ],
-            "North America": [
+            northAmerica: [
                 {name: "Antigua and Barbuda", code: "ag"}, {name: "Bahamas", code: "bs"},
                 {name: "Barbados", code: "bb"}, {name: "Belize", code: "bz"},
                 {name: "Canada", code: "ca"}, {name: "Costa Rica", code: "cr"},
@@ -207,7 +203,7 @@
                 {name: "Saint Vincent and the Grenadines", code: "vc"}, {name: "Trinidad and Tobago", code: "tt"},
                 {name: "United States", code: "us"}
             ],
-            "South America": [
+            southAmerica: [
                 {name: "Argentina", code: "ar"}, {name: "Bolivia", code: "bo"},
                 {name: "Brazil", code: "br"}, {name: "Chile", code: "cl"},
                 {name: "Colombia", code: "co"}, {name: "Ecuador", code: "ec"},
@@ -215,79 +211,93 @@
                 {name: "Peru", code: "pe"}, {name: "Suriname", code: "sr"},
                 {name: "Uruguay", code: "uy"}, {name: "Venezuela", code: "ve"}
             ],
-            "Oceania": [
-                {name: "Australia", code: "au"}, {name: "Fiji", code: "fj"},
-                {name: "Kiribati", code: "ki"}, {name: "Marshall Islands", code: "mh"},
-                {name: "Micronesia", code: "fm"}, {name: "Nauru", code: "nr"},
-                {name: "New Zealand", code: "nz"}, {name: "Palau", code: "pw"},
-                {name: "Papua New Guinea", code: "pg"}, {name: "Samoa", code: "ws"},
-                {name: "Solomon Islands", code: "sb"}, {name: "Tonga", code: "to"},
-                {name: "Tuvalu", code: "tv"}, {name: "Vanuatu", code: "vu"}
+            europe: [
+                {name: "Albania", code: "al"}, {name: "Andorra", code: "ad"},
+                {name: "Austria", code: "at"}, {name: "Belarus", code: "by"},
+                {name: "Belgium", code: "be"}, {name: "Bosnia and Herzegovina", code: "ba"},
+                {name: "Bulgaria", code: "bg"}, {name: "Croatia", code: "hr"},
+                {name: "Cyprus", code: "cy"}, {name: "Czech Republic", code: "cz"},
+                {name: "Denmark", code: "dk"}, {name: "Estonia", code: "ee"},
+                {name: "Finland", code: "fi"}, {name: "France", code: "fr"},
+                {name: "Germany", code: "de"}, {name: "Greece", code: "gr"},
+                {name: "Hungary", code: "hu"}, {name: "Iceland", code: "is"},
+                {name: "Ireland", code: "ie"}, {name: "Italy", code: "it"},
+                {name: "Kosovo", code: "xk"}, {name: "Latvia", code: "lv"},
+                {name: "Liechtenstein", code: "li"}, {name: "Lithuania", code: "lt"},
+                {name: "Luxembourg", code: "lu"}, {name: "Malta", code: "mt"},
+                {name: "Moldova", code: "md"}, {name: "Monaco", code: "mc"},
+                {name: "Montenegro", code: "me"}, {name: "Netherlands", code: "nl"},
+                {name: "North Macedonia", code: "mk"}, {name: "Norway", code: "no"},
+                {name: "Poland", code: "pl"}, {name: "Portugal", code: "pt"},
+                {name: "Romania", code: "ro"}, {name: "San Marino", code: "sm"},
+                {name: "Serbia", code: "rs"}, {name: "Slovakia", code: "sk"},
+                {name: "Slovenia", code: "si"}, {name: "Spain", code: "es"},
+                {name: "Sweden", code: "se"}, {name: "Switzerland", code: "ch"},
+                {name: "Ukraine", code: "ua"}, {name: "Vatican City", code: "va"}
             ]
         };
 
-        let currentContinent = "Asia";
-        let level = 1;
-        let maxLevel = continents[currentContinent].length;
+        let currentContinent = "asia";
+        let answeredFlags = new Set();
+        let currentLevel = 1;
+        let maxLevel = countries[currentContinent].length;
 
-        const flagElement = document.getElementById('flag');
-        const optionButtons = [
-            document.getElementById('option1'),
-            document.getElementById('option2'),
-            document.getElementById('option3'),
-            document.getElementById('option4')
-        ];
-        const levelElement = document.getElementById('level');
-        const modeButton = document.getElementById('mode');
-
-        function updateFlag() {
-            const continentCountries = continents[currentContinent];
-            const randomIndex = Math.floor(Math.random() * continentCountries.length);
-            const randomCountry = continentCountries[randomIndex];
-
-            flagElement.src = `https://flagcdn.com/w320/${randomCountry.code}.png`;
-
-            const options = [...continentCountries];
-            options.splice(randomIndex, 1); // Remove correct answer from options
-            options.sort(() => 0.5 - Math.random()); // Shuffle remaining options
-            const otherOptions = options.slice(0, 3); // Take first 3 shuffled options
-
-            const allOptions = [randomCountry, ...otherOptions];
-            allOptions.sort(() => 0.5 - Math.random()); // Shuffle all options again
-
-            for (let i = 0; i < 4; i++) {
-                optionButtons[i].textContent = allOptions[i].name;
-                optionButtons[i].onclick = () => checkAnswer(allOptions[i], randomCountry);
+        function loadFlag() {
+            if (currentLevel > maxLevel) {
+                alert(`You've Completed All Flags For ${currentContinent}!`);
+                currentLevel = 1;
+                answeredFlags.clear();
+                maxLevel = countries[currentContinent].length;
             }
+
+            const availableCountries = countries[currentContinent].filter(country => !answeredFlags.has(country.code));
+            if (availableCountries.length === 0) {
+                answeredFlags.clear();
+                return loadFlag();
+            }
+
+            const correctIndex = Math.floor(Math.random() * availableCountries.length);
+            const correctCountry = availableCountries[correctIndex];
+            answeredFlags.add(correctCountry.code);
+
+            const flagImg = document.getElementById("flag");
+            flagImg.src = `https://flagcdn.com/${correctCountry.code}.svg`;
+
+            const options = Array.from(document.querySelectorAll(".options button"));
+            const correctButtonIndex = Math.floor(Math.random() * options.length);
+
+            const shuffledCountries = [...countries[currentContinent]]
+                .filter(country => country.code !== correctCountry.code)
+                .sort(() => 0.5 - Math.random())
+                .slice(0, 3);
+            shuffledCountries.splice(correctButtonIndex, 0, correctCountry);
+
+            options.forEach((button, index) => {
+                button.textContent = shuffledCountries[index].name;
+                button.onclick = () => {
+                    if (index === correctButtonIndex) {
+                        currentLevel++;
+                        document.getElementById("level").textContent = currentLevel;
+                        loadFlag();
+                    } else {
+                        alert(`Wrong Answer, The Correct Was ${correctCountry.name}!`);
+                        loadFlag();
+                    }
+                };
+            });
         }
 
-        function checkAnswer(selectedCountry, correctCountry) {
-            if (selectedCountry.name === correctCountry.name) {
-                if (level < maxLevel) {
-                    level++;
-                    levelElement.textContent = level;
-                    updateFlag();
-                } else {
-                    alert("Congratulations! You've completed all levels!");
-                }
-            } else {
-                alert("Wrong answer! Try again.");
-            }
-        }
-
-        modeButton.addEventListener('click', () => {
-            const continentsKeys = Object.keys(continents);
-            const currentIndex = continentsKeys.indexOf(currentContinent);
-            const nextIndex = (currentIndex + 1) % continentsKeys.length;
-            currentContinent = continentsKeys[nextIndex];
+        document.getElementById("modeButton").addEventListener("click", () => {
+            const continents = ["asia", "africa", "northAmerica", "southAmerica", "europe"];
+            currentContinent = continents[(continents.indexOf(currentContinent) + 1) % continents.length];
             modeButton.textContent = currentContinent;
-            level = 1;
-            maxLevel = continents[currentContinent].length;
-            levelElement.textContent = level;
-            updateFlag();
+            maxLevel = countries[currentContinent].length;
+            currentLevel = 1;
+            answeredFlags.clear();
+            loadFlag();
         });
 
-        updateFlag();
+        loadFlag();
     </script>
 </body>
 </html>
