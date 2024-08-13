@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" sizes="180x180" href="/ wwwaw di apple-touch-icon.png">
-    <link rel="icon" type="image/png" o name="msapplication-TileColor" content="#ffffff">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
     <title>Guess The Flag</title>
     <style>
         body {
             text-align: center;
-            font-family: 'Segoe UI', Tahoma, Geneqqva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f4f9;
             color: #333;
             margin: 0;
@@ -253,17 +254,17 @@
         let currentContinent = "Asia";
         let answeredFlags = new Set();
         let currentLevel = 1;
-        let maxLevel = countries[currentContinent].length;
+        let maxLevel = continents[currentContinent].length;
 
         function loadFlag() {
             if (currentLevel > maxLevel) {
                 alert(`You've Completed All Flags For ${currentContinent}!`);
                 currentLevel = 1;
                 answeredFlags.clear();
-                maxLevel = countries[currentContinent].length;
+                maxLevel = continents[currentContinent].length;
             }
 
-            const availableCountries = countries[currentContinent].filter(country => !answeredFlags.has(country.code));
+            const availableCountries = continents[currentContinent].filter(country => !answeredFlags.has(country.code));
             if (availableCountries.length === 0) {
                 answeredFlags.clear();
                 return loadFlag();
@@ -274,12 +275,12 @@
             answeredFlags.add(correctCountry.code);
 
             const flagImg = document.getElementById("flag");
-            flagImg.src = `https://flagcdn.com/${correctCountry.code}.svg`;
+            flagImg.src = `https://flagcdn.com/w320/${correctCountry.code}.png`;
 
             const options = Array.from(document.querySelectorAll(".options button"));
             const correctButtonIndex = Math.floor(Math.random() * options.length);
 
-            const shuffledCountries = [...countries[currentContinent]]
+            const shuffledCountries = [...continents[currentContinent]]
                 .filter(country => country.code !== correctCountry.code)
                 .sort(() => 0.5 - Math.random())
                 .slice(0, 3);
@@ -305,9 +306,9 @@
             const currentIndex = continentsKeys.indexOf(currentContinent);
             const nextIndex = (currentIndex + 1) % continentsKeys.length;
             currentContinent = continentsKeys[nextIndex];
-            modeButton.textContent = currentContinent;
-            maxLevel = continents
-            level = 1;
+            document.getElementById("modeButton").textContent = currentContinent;
+            currentLevel = 1;
+            maxLevel = continents[currentContinent].length;
             answeredFlags.clear();
             loadFlag();
         });
