@@ -302,11 +302,11 @@
         }
 
         document.getElementById("modeButton").addEventListener("click", () => {
+            currentLevel = 1;
             const continentsKeys = Object.keys(continents);
             const currentIndex = continentsKeys.indexOf(currentContinent);
             const nextIndex = (currentIndex + 1) % continentsKeys.length;
             currentContinent = continentsKeys[nextIndex];
-            currentLevel = 1;
             document.getElementById("modeButton").textContent = currentContinent;
             currentLevel = 1;
             maxLevel = continents[currentContinent].length;
