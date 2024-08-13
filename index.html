@@ -258,7 +258,7 @@
 
         function loadFlag() {
             if (currentLevel > maxLevel) {
-                currentLevel = 1;
+                currentLevel = 0;
                 answeredFlags.clear();
                 maxLevel = continents[currentContinent].length;
                 alert(`You've Completed All Flags For ${currentContinent}!`);
@@ -302,13 +302,13 @@
         }
 
         document.getElementById("modeButton").addEventListener("click", () => {
-            currentLevel = 1;
+            currentLevel = 0;
             const continentsKeys = Object.keys(continents);
             const currentIndex = continentsKeys.indexOf(currentContinent);
             const nextIndex = (currentIndex + 1) % continentsKeys.length;
             currentContinent = continentsKeys[nextIndex];
             document.getElementById("modeButton").textContent = currentContinent;
-            currentLevel = 1;
+            currentLevel = 0;
             maxLevel = continents[currentContinent].length;
             answeredFlags.clear();
             loadFlag();
