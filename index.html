@@ -258,10 +258,10 @@
 
         function loadFlag() {
             if (currentLevel > maxLevel) {
-                alert(`You've Completed All Flags For ${currentContinent}!`);
                 currentLevel = 1;
                 answeredFlags.clear();
                 maxLevel = continents[currentContinent].length;
+                alert(`You've Completed All Flags For ${currentContinent}!`);
             }
 
             const availableCountries = continents[currentContinent].filter(country => !answeredFlags.has(country.code));
@@ -294,8 +294,8 @@
                         document.getElementById("level").textContent = currentLevel;
                         loadFlag();
                     } else {
-                        alert(`Wrong Answer, The Correct Was ${correctCountry.name}!`);
                         loadFlag();
+                        alert(`Wrong Answer, The Correct Was ${correctCountry.name}!`);
                     }
                 };
             });
@@ -306,6 +306,7 @@
             const currentIndex = continentsKeys.indexOf(currentContinent);
             const nextIndex = (currentIndex + 1) % continentsKeys.length;
             currentContinent = continentsKeys[nextIndex];
+            currentLevel = 1;
             document.getElementById("modeButton").textContent = currentContinent;
             currentLevel = 1;
             maxLevel = continents[currentContinent].length;
