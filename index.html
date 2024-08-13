@@ -134,7 +134,7 @@
     <button class="mode-button" id="modeButton">Asia</button>
     <script>
         const countries = {
-            asia: [
+            Asia: [
                 {name: "Afghanistan", code: "af"}, {name: "Armenia", code: "am"},
                 {name: "Azerbaijan", code: "az"}, {name: "Bahrain", code: "bh"},
                 {name: "Bangladesh", code: "bd"}, {name: "Brunei", code: "bn"},
@@ -160,7 +160,7 @@
                 {name: "United Arab Emirates", code: "ae"}, {name: "Uzbekistan", code: "uz"},
                 {name: "Vietnam", code: "vn"}
             ],
-            africa: [
+            Africa: [
                 {name: "Algeria", code: "dz"}, {name: "Angola", code: "ao"},
                 {name: "Benin", code: "bj"}, {name: "Botswana", code: "bw"},
                 {name: "Burkina Faso", code: "bf"}, {name: "Burundi", code: "bi"},
@@ -189,7 +189,7 @@
                 {name: "Uganda", code: "ug"}, {name: "Zambia", code: "zm"},
                 {name: "Zimbabwe", code: "zw"}
             ],
-            northAmerica: [
+            North America: [
                 {name: "Antigua and Barbuda", code: "ag"}, {name: "Bahamas", code: "bs"},
                 {name: "Barbados", code: "bb"}, {name: "Belize", code: "bz"},
                 {name: "Canada", code: "ca"}, {name: "Costa Rica", code: "cr"},
@@ -203,7 +203,7 @@
                 {name: "Saint Vincent and the Grenadines", code: "vc"}, {name: "Trinidad and Tobago", code: "tt"},
                 {name: "United States", code: "us"}
             ],
-            southAmerica: [
+            South America: [
                 {name: "Argentina", code: "ar"}, {name: "Bolivia", code: "bo"},
                 {name: "Brazil", code: "br"}, {name: "Chile", code: "cl"},
                 {name: "Colombia", code: "co"}, {name: "Ecuador", code: "ec"},
@@ -237,7 +237,7 @@
             ]
         };
 
-        let currentContinent = "asia";
+        let currentContinent = "Asia";
         let answeredFlags = new Set();
         let currentLevel = 1;
         let maxLevel = countries[currentContinent].length;
