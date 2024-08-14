@@ -23,20 +23,21 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    position: relative; /* Add this to use absolute positioning for child elements */
+    position: relative; /* Required for absolute positioning of children */
 }
 
 h1 {
     position: absolute;
-    top: 30px; /* Adjust this value to move it further down or up */
-    width: 100%; /* Center text horizontally */
+    top: 30px; /* Adjust this value as needed */
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
     margin: 0;
     font-size: 2.5em;
     color: #333;
 }
 
 .flag-container {
-    margin-top: 100px; /* Increase this margin to ensure space for the h1 */
+    margin-top: 80px; /* Adjust this to provide space below the heading */
 }
 
         img {
