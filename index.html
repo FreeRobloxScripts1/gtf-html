@@ -23,21 +23,21 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    position: relative; /* Required for absolute positioning of children */
+}
+
+header {
+    width: 100%;
+    position: relative;
 }
 
 h1 {
-    position: absolute;
-    top: 30px; /* Adjust this value as needed */
-    left: 50%;
-    transform: translateX(-50%); /* Center horizontally */
-    margin: 0;
     font-size: 2.5em;
+    margin-top: 20px; /* Adjust this value to move the heading lower */
     color: #333;
 }
 
 .flag-container {
-    margin-top: 80px; /* Adjust this to provide space below the heading */
+    margin-top: 40px; /* Adjust to ensure space below the heading */
 }
 
         img {
@@ -136,7 +136,9 @@ h1 {
 <body>
     <div class="level">Level: <span id="level">1</span></div>
     <p>What Country's Flag Is This?</p>
+    <header>
     <h1>Guess The Flag</h1>
+    </header>
     <div class="flag-container">
         <img id="flag" src="" alt="Flag">
     </div>
